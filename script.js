@@ -1,9 +1,4 @@
-let listaAfiliados = []
-
-
-
-
-let listaClientes = [], campoCedula, campoNombre, ultimoElementoContador
+let listaAfiliados = [], selectTipoDocumento, campoNumeroDocumento, campoNombre, selectAfiliacion, campoPassword, ultimoElementoContador, registroEncontrado, usuarioLogueado
 
 function leerLocalStorage() {
     listaAfiliados = []
@@ -15,119 +10,82 @@ function leerLocalStorage() {
 
     return listaAfiliados
 }
-// function leerLocalStorage() {
-//     listaClientes = []
-
-//     JSON.parse(localStorage.getItem(0)) !== null ?
-//         listaClientes = JSON.parse(localStorage.getItem(0))
-//         :
-//         console.log("No hay localStorage en el momento");
-
-//     return listaClientes
-// }
-
 
 //ALERTA
 const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 
 const alert = (message, type) => {
-  const wrapper = document.createElement('div')
-  wrapper.innerHTML = [
-    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-    `   <div>${message}</div>`,
-    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-    '</div>'
-  ].join('')
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML = [
+        `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+        `   <div>${message}</div>`,
+        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '</div>'
+    ].join('')
 
-  alertPlaceholder.append(wrapper)
+    alertPlaceholder.append(wrapper)
 }
 
-
-
-function buscarCliente() {
+function buscarAfiliado() {
     event.preventDefault()
 
-    campoCedula = document.getElementById('campoCedula').value
+    inicioUser = document.getElementById('inicioUser').value
+    inicioPassword = document.getElementById('inicioPassword').value
 
-    if (campoCedula !== "") {
-        listaClientes = leerLocalStorage()
+    if (inicioUser != "" && inicioPassword != "") {
+        listaAfiliados = leerLocalStorage()
 
-        let registroEncontrado = listaClientes.find(elemento => elemento.cedula == campoCedula)
+        registroEncontrado = listaAfiliados.find(elemento => elemento.numeroDocumento == inicioUser)
 
-        if (registroEncontrado !== undefined) {
-            document.getElementById('campoNombre').value = registroEncontrado.nombre
-        } else {
-            document.getElementById('campoNombre').value = ""
-            alert("Este cliente No existe.")
+        if (registroEncontrado) {
+            if (registroEncontrado.numeroDocumento == inicioUser && registroEncontrado.password == inicioPassword) {
+                usuarioLogueado = registroEncontrado.nombre
+                window.location.href = "index.html"
+            } else {
+                alert("Datos incorrectos.", "danger")
+            }
         }
-
-    } else alert("Debe llenar ambos campos para Registrar.")
+    } else alert("Debe llenar ambos campos para ingresar.", "info")
 }
 
 function registrarAfiliado() {
     event.preventDefault()
 
     selectTipoDocumento = document.getElementById('selectTipoDocumento').value
-    console.log(selectTipoDocumento);
     campoNumeroDocumento = document.getElementById('campoNumeroDocumento').value
-    console.log(campoNumeroDocumento);
-    campoNombre = document.getElementById('campoNombre').value
-    console.log(campoNombre);
-    selectfiliacion = document.getElementById('selectfiliacion').value
-    console.log(selectfiliacion);
+    campoNombre = document.getElementById('campoNombre').value.toUpperCase()
+    selectAfiliacion = document.getElementById('selectAfiliacion').value
     campoPassword = document.getElementById('campoPassword').value
-    console.log(campoPassword);
 
     if (campoNumeroDocumento != "" && campoNombre != "" && campoPassword != "") {
         listaAfiliados = leerLocalStorage()
 
-        if (listaAfiliados.find(elemento => elemento.cedula == campoCedula) == undefined) {
+        if (listaAfiliados.find(elemento => elemento.numeroDocumento == campoNumeroDocumento) == undefined) {
             listaAfiliados.push({
-                cedula: campoCedula,
+                tipoDocumento: selectTipoDocumento,
+                numeroDocumento: campoNumeroDocumento,
                 nombre: campoNombre,
-                ventas: []
+                tipoAfiliacion: selectAfiliacion,
+                password: campoPassword
             },)
             localStorage.clear()
             localStorage.setItem(0, JSON.stringify(listaAfiliados))
-            alert("Se ha registrado el cliente.")
+
+            alert("Registro realizado con exito.", "success")
         } else {
-            alert("Este cliente ya existe y no puede ser añadido nuevamente")
+            alert("El afiliado ya existe y no puede ser añadido nuevamente", "danger")
         }
 
-        console.log(listaAfiliados);
-
         document.getElementById('formularioRegistroAfiliados').reset()
-    } else alert('Nice, you triggered this alert message!', 'warning')
+    } else alert('Debes llenar cada uno de los campos', 'warning')
 }
-// function registrarCliente() {
-//     event.preventDefault()
 
-//     campoCedula = document.getElementById('campoCedula').value
-//     //console.log(campoCedula);
-//     campoNombre = document.getElementById('campoNombre').value
-//     //console.log(campoNombre);
 
-//     if (campoCedula !== "" && campoNombre !== "") {
-//         listaClientes = leerLocalStorage()
 
-//         if (listaClientes.find(elemento => elemento.cedula == campoCedula) == undefined) {
-//             listaClientes.push({
-//                 cedula: campoCedula,
-//                 nombre: campoNombre,
-//                 ventas: []
-//             },)
-//             localStorage.clear()
-//             localStorage.setItem(0, JSON.stringify(listaClientes))
-//             alert("Se ha registrado el cliente.")
-//         } else {
-//             alert("Este cliente ya existe y no puede ser añadido nuevamente")
-//         }
 
-//         console.log(listaClientes);
 
-//         document.getElementById('formularioClientes').reset()
-//     } else alert("Debe llenar ambos campos para Registrar.")
-// }
+
+
 
 function eliminarCliente() {
     event.preventDefault()
@@ -187,62 +145,62 @@ function actualizarCliente() {
     document.getElementById('formularioClientes').reset()
 }
 
-(function () {
-    listaClientes = leerLocalStorage()
+// (function () {
+//     listaClientes = leerLocalStorage()
 
-    //Imprime cada registro del LocalStorage en el <select> de la página ventas.html
-    let selectClientes = document.getElementById('selectClientes')
-    let clienteVenta
-    listaClientes.forEach((element) => {
+//     //Imprime cada registro del LocalStorage en el <select> de la página ventas.html
+//     let selectClientes = document.getElementById('selectClientes')
+//     let clienteVenta
+//     listaClientes.forEach((element) => {
 
-        clienteVenta = document.createElement('option')
-        clienteVenta.value = element.cedula
-        clienteVenta.text = element.nombre
-        try {
-            selectClientes.appendChild(clienteVenta)
-        } catch (error) { }
-    });
-
-
+//         clienteVenta = document.createElement('option')
+//         clienteVenta.value = element.cedula
+//         clienteVenta.text = element.nombre
+//         try {
+//             selectClientes.appendChild(clienteVenta)
+//         } catch (error) { }
+//     });
 
 
-    //Imprime cada registro del LocalStorage en el <tbody> de la página index.html
-    let tbodyClientes = document.getElementById('tbody')
-    let tableRow, clienteCedula, clienteNombre, clienteVentas, totalVentas, temporal = 0
 
-    listaClientes.forEach(element => {
-        tableRow = document.createElement('tr')
 
-        clienteCedula = document.createElement('td')
-        clienteCedula.innerText = element.cedula
+//     //Imprime cada registro del LocalStorage en el <tbody> de la página index.html
+//     let tbodyClientes = document.getElementById('tbody')
+//     let tableRow, clienteCedula, clienteNombre, clienteVentas, totalVentas, temporal = 0
 
-        clienteNombre = document.createElement('td')
-        clienteNombre.innerText = element.nombre
+//     listaClientes.forEach(element => {
+//         tableRow = document.createElement('tr')
 
-        clienteVentas = document.createElement('td')
+//         clienteCedula = document.createElement('td')
+//         clienteCedula.innerText = element.cedula
 
-        totalVentas = document.createElement('td')
+//         clienteNombre = document.createElement('td')
+//         clienteNombre.innerText = element.nombre
 
-        element.ventas.forEach(element2 => {
-            clienteVentas.innerText += JSON.stringify(element2.producto) + ", "
+//         clienteVentas = document.createElement('td')
 
-            //Se hace la sumatoria de las ventas por Cliente
-            temporal += parseInt(element2.valor)
-        });
-        totalVentas.innerText = temporal
-        temporal = 0
+//         totalVentas = document.createElement('td')
 
-        tableRow.appendChild(clienteCedula)
-        tableRow.appendChild(clienteNombre)
-        tableRow.appendChild(clienteVentas)
-        tableRow.appendChild(totalVentas)
+//         element.ventas.forEach(element2 => {
+//             clienteVentas.innerText += JSON.stringify(element2.producto) + ", "
 
-        try {
-            tbodyClientes.appendChild(tableRow)
-        } catch (error) { }
-    });
+//             //Se hace la sumatoria de las ventas por Cliente
+//             temporal += parseInt(element2.valor)
+//         });
+//         totalVentas.innerText = temporal
+//         temporal = 0
 
-})()
+//         tableRow.appendChild(clienteCedula)
+//         tableRow.appendChild(clienteNombre)
+//         tableRow.appendChild(clienteVentas)
+//         tableRow.appendChild(totalVentas)
+
+//         try {
+//             tbodyClientes.appendChild(tableRow)
+//         } catch (error) { }
+//     });
+
+// })()
 
 
 //Aqui se esconde como imprimir todas las ventas por 1 cliente

@@ -21,12 +21,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                <form class="ms-5 mt-2 d-flex align-items-end" role="search">
-                    <input id="inicioUser" class="form-control me-2" type="text" placeholder="Usuario"
-                        aria-label="Search">
+                <form class="ms-5 mt-2 d-flex align-items-end">
+                    <input id="inicioUser" class="form-control me-2" type="text" placeholder="Usuario" required>
                     <input id="inicioPassword" class="form-control me-2" type="password" placeholder="Contraseña"
-                        aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Ingresar</button>
+                        required>
+                    <button class="btn btn-outline-success" type="submit" onclick="buscarAfiliado()">Ingresar</button>
                 </form>
 
                 <div class="d-flex align-items-end flex-column ms-auto mt-2">
@@ -74,16 +73,16 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput2" class="form-label"># Documento</label>
                             <input type="number" class="form-control" id="campoNumeroDocumento"
-                                placeholder="1.111.800.600">
+                                placeholder="1.111.800.600" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput3" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="campoNombre"
-                                placeholder="Escriba su nombre aquí" minlength="10">
+                                placeholder="Escriba su nombre aquí" minlength="10" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput4" class="form-label">Tipo de Afiliación</label>
-                            <select class="form-select" id="selectfiliacion" aria-label="Default select example">
+                            <select class="form-select" id="selectAfiliacion" aria-label="Default select example">
                                 <option value="1">Afiliado</option>
                                 <option value="2">Empleador</option>
                                 <option value="3">Independiente</option>
@@ -92,7 +91,7 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput5" class="form-label">Contraseña</label>
                             <input type="password" class="form-control" id="campoPassword" placeholder="********"
-                                minlength="6">
+                                minlength="6" required>
                         </div>
                     </form>
 
@@ -102,13 +101,14 @@
                     <button type="button" class="btn btn-primary" onclick="registrarAfiliado()">Registrarse</button>
                 </div>
 
-                <!-- ALERTA -->
-                <div class="d-flex flex-column justify-content-center w-100 d-block" id="liveAlertPlaceholder" style="position: absolute;"></div>
             </div>
         </div>
     </div>
-
-
+    
+    
+    <!-- ALERTA -->
+    <div class="d-flex flex-column justify-content-center d-block" id="liveAlertPlaceholder"
+        style="position: relative; z-index: 1056; top: -9em;"></div>
 
 
     <script src="bootstrap.bundle.min.js"></script>
