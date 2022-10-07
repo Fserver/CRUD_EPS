@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPS</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+
+<body class="container">
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">EPS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <form class="ms-5 mt-2 d-flex align-items-end" role="search">
+                    <input id="inicioUser" class="form-control me-2" type="text" placeholder="Usuario"
+                        aria-label="Search">
+                    <input id="inicioPassword" class="form-control me-2" type="password" placeholder="Contraseña"
+                        aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Ingresar</button>
+                </form>
+
+                <div class="d-flex align-items-end flex-column ms-auto mt-2">
+                    <a type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalRegistro">
+                        Aún no está registrado ?
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="row d-flex align-items-center justify-content-center">
+        <div class="col">
+            <h1 class="display-1">
+                EPS
+            </h1>
+        </div>
+    </div>
+
+
+
+
+    <!-- MODAL OCULTO - FORMULARIO REGISTRO -->
+    <div class="modal fade" id="modalRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Formulario de Registro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form id="formularioRegistroAfiliados" action="">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Tipo de Documento</label>
+                            <select class="form-select" id="selectTipoDocumento" aria-label="Default select example">
+                                <option value="1">Cédula de Ciudadanía</option>
+                                <option value="2">Cédula de Extranjería</option>
+                                <option value="3">Tarjeta de Identidad</option>
+                                <option value="4">Registro Civíl</option>
+                                <option value="5">Otro</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput2" class="form-label"># Documento</label>
+                            <input type="number" class="form-control" id="campoNumeroDocumento"
+                                placeholder="1.111.800.600">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput3" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="campoNombre"
+                                placeholder="Escriba su nombre aquí" minlength="10">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput4" class="form-label">Tipo de Afiliación</label>
+                            <select class="form-select" id="selectfiliacion" aria-label="Default select example">
+                                <option value="1">Afiliado</option>
+                                <option value="2">Empleador</option>
+                                <option value="3">Independiente</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput5" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="campoPassword" placeholder="********"
+                                minlength="6">
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="registrarAfiliado()">Registrarse</button>
+                </div>
+
+                <!-- ALERTA -->
+                <div class="d-flex flex-column justify-content-center w-100 d-block" id="liveAlertPlaceholder" style="position: absolute;"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
