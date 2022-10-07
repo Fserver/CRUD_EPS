@@ -59,7 +59,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <form id="formularioRegistroAfiliados" action="">
+                    <form id="formularioRegistro" action="">
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Tipo de Documento</label>
                             <select class="form-select" id="selectTipoDocumento" aria-label="Default select example">
@@ -90,14 +90,14 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput5" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="campoPassword" placeholder="********"
+                            <input type="password" class="form-control" id="campoPassword" placeholder="****"
                                 minlength="6" required>
                         </div>
                     </form>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiarFormulario()">Cerrar</button>
                     <button type="button" class="btn btn-primary" onclick="registrarAfiliado()">Registrarse</button>
                 </div>
 

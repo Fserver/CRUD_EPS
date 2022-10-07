@@ -54,6 +54,21 @@ function inicioSesion() {
     } else alert("Debe llenar ambos campos para ingresar.", "info")
 }
 
+function limpiarFormulario() {
+    try {
+        document.getElementById('formularioRegistro').reset()
+    } catch (error) { }
+    try {
+        document.getElementById('formularioRegistroAfiliados').reset()
+    } catch (error) { }
+    try {
+        document.getElementById('').reset()
+    } catch (error) { }
+    try {
+        document.getElementById('').reset()
+    } catch (error) { }
+}
+
 function registrarAfiliado() {
     event.preventDefault()
 
@@ -82,18 +97,18 @@ function registrarAfiliado() {
             alert("El afiliado ya existe y no puede ser añadido nuevamente", "danger")
         }
 
-        document.getElementById('formularioRegistroAfiliados').reset()
+        limpiarFormulario()
     } else alert('Debes llenar cada uno de los campos', 'warning')
 }
 
 //COMPROBADOR DE SESIÓN
-(function name() {
+(function () {
 
     if (window.location.pathname != "/login.html") {
         usuarioLogueado = JSON.parse(sessionStorage.getItem('sesion'))
 
         if (usuarioLogueado != null) {
-            document.getElementById('usuarioActivo').innerText = "Hola, "+usuarioLogueado.user
+            document.getElementById('usuarioActivo').innerText = "Hola, " + usuarioLogueado.user
         } else window.location.href = "login.html"
     }
 })()
