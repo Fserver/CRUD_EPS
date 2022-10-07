@@ -13,7 +13,7 @@
 
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#" onclick="destruirSesion()">Salir</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -40,27 +40,88 @@
                 <p id="usuarioActivo"></p>
             </div>
         </div>
-
-
     </nav>
 
 
-
-    <div class="row">
+    <!-- ENCABEZADO -->
+    <div class="row m-5">
         <div class="col">
-
-
+            <div class="card">
+                <div class="card-body text-center">
+                    
+                    <h1 class="display-5 text-center">EPS - Salud Primero</h1>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- ESPECIALISTAS -->
+    <div class="row">
+        <h1 class="display-6 text-center">Nuestros Especialistas</h1>
+        <div class="col d-flex justify-content-center">
+            <div class="card m-3">
+                <img src="fotos/especialista1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's
+                        content.</p>
+                </div>
+            </div>
 
-    <!-- ALERTA -->
-    <div class="d-flex flex-column justify-content-center d-block" id="liveAlertPlaceholder"
-        style="position: relative; z-index: 1056; top: -9em;"></div>
+            <div class="card m-3">
+                <img src="fotos/especialista2.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's
+                        content.</p>
+                </div>
+            </div>
+
+            <div class="card m-3">
+                <img src="fotos/especialista3.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's
+                        content.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- SERVICIOS -->
+        <div class="row m-5">
+            <h1 class="display-6 text-center">Servicios</h1>
+            <div class="col-sm-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Atención a primera infacia</h5>
+                        <p class="card-text">Contamos con especialistas que te acompañarán en el desarrollo de tus
+                            hijos.
+                        </p>
+                        <a href="#" class="btn btn-primary">Agendar cita</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Medicina natual</h5>
+                        <p class="card-text">Nuestros especialistas están preparados para tratar al paciente segun su
+                            necesidad y con medicina natural.</p>
+                        <a href="#" class="btn btn-primary">Agendar cita</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-    <script src="bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+        <!-- ALERTA -->
+        <div class="d-flex flex-column justify-content-center d-block" id="liveAlertPlaceholder"
+            style="position: relative; z-index: 1056; top: -9em;"></div>
+
+
+        <script src="bootstrap.bundle.min.js"></script>
+        <script src="script.js"></script>
 
 </body>
 
