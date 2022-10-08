@@ -158,14 +158,14 @@ function registrarCitaAfiliado() {
     console.log(window.location.pathname);
     usuarioLogueado = JSON.parse(sessionStorage.getItem('sesion'))
     console.log(usuarioLogueado);
-/*
+
     if (window.location.pathname != "/login.html" && usuarioLogueado == null) {
 
         window.location.href = "/login.html"
     } else {
         
     }
-*/
+
 })()
 
 function destruirSesion() {
