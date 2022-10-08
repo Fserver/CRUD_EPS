@@ -2,7 +2,7 @@ let listaAfiliados = [], listaUsers = [],
     selectTipoDocumento, campoNumeroDocumento, campoNombre, selectAfiliacion, campoPassword,
     selectTipoDocumentoAfiliado, campoNumeroDocumentoAfiliado, campoNombreAfiliado, campoFechaAfiliado,
     ultimoElementoContador, registroEncontrado, registroEditar
-    usuarioLogueado = null
+usuarioLogueado = null
 
 // 0
 function leerLocalStorage() {
@@ -218,31 +218,20 @@ function destruirSesion() {
 })()
 
 
-// function eliminarCliente() {
-//     event.preventDefault()
+function eliminarAfiliado() {
+    event.preventDefault()
 
-//     campoCedula = document.getElementById('campoCedula').value
+    listaAfiliados = leerLocalStorageAfiliados()
 
-//     if (campoCedula !== "") {
-//         listaClientes = leerLocalStorage()
+    listaAfiliados = listaAfiliados.filter(registro => registro.numeroDocumento !== registroEditar)
 
-//         let registroEncontrado = listaClientes.find(elemento => elemento.cedula == campoCedula)
+    localStorage.removeItem('1')
+    localStorage.setItem('1', JSON.stringify(listaAfiliados))
 
-//         if (registroEncontrado !== undefined) {
-//             listaClientes = listaClientes.filter(registro => registro.cedula !== registroEncontrado.cedula)
+    alert("Registro eliminado.", "danger");
 
-//             localStorage.clear()
-//             localStorage.setItem(0, JSON.stringify(listaClientes))
-
-//             alert(registroEncontrado.nombre + " fue eliminado.");
-//         } else {
-//             document.getElementById('campoNombre').value = ""
-//             alert("Este cliente No existe.")
-//         }
-//     } else alert("Debe digitar una cédula existente para eliminar.")
-
-//     document.getElementById('formularioClientes').reset()
-// }
+    location.reload()
+}
 
 
 function cargarListaAfiliados(id) {
