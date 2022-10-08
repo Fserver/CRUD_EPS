@@ -141,7 +141,7 @@
                     <form id="formularioRegistroAfiliados" action="">
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Tipo de Documento</label>
-                            <select class="form-select" id="selectTipoDocumentoAfiliado"
+                            <select class="form-select" id="selectTipoDocumentoAfiliadoUpdate"
                                 aria-label="Default select example">
                                 <option value="1">Cédula de Ciudadanía</option>
                                 <option value="2">Cédula de Extranjería</option>
@@ -152,25 +152,25 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput2" class="form-label"># Documento</label>
-                            <input type="number" class="form-control" id="campoNumeroDocumentoAfiliado" required>
+                            <input type="number" class="form-control" id="campoNumeroDocumentoAfiliadoUpdate" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput3" class="form-label">Paciente</label>
-                            <input type="text" class="form-control" id="campoNombreAfiliado" minlength="10" required>
+                            <input type="text" class="form-control" id="campoNombreAfiliadoUpdate" minlength="10" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput4" class="form-label">Fecha y Hora</label>
-                            <input type="datetime-local" class="form-control" id="campoFechaAfiliado" required>
+                            <input type="datetime-local" class="form-control" id="campoFechaAfiliadoUpdate" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Especialidad</label>
-                            <select class="form-select" id="selectEspecialidadAfiliado"
+                            <select class="form-select" id="selectEspecialidadAfiliadoUpdate"
                                 aria-label="Default select example">
-                                <option value="MÉDICO GENERAL">MÉDICO GENERAL</option>
-                                <option value="OFTALMOLOGÍA">OFTALMOLOGÍA</option>
-                                <option value="PEDIATRÍA">PEDIATRÍA</option>
-                                <option value="GINECOLOGÍA">GINECOLOGÍA</option>
-                                <option value="ODONTOLOGÍA">ODONTOLOGÍA</option>
+                                <option value="1">MÉDICO GENERAL</option>
+                                <option value="2">OFTALMOLOGÍA</option>
+                                <option value="3">PEDIATRÍA</option>
+                                <option value="4">GINECOLOGÍA</option>
+                                <option value="5">ODONTOLOGÍA</option>
                             </select>
                         </div>
                     </form>
@@ -178,8 +178,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" onclick="">Actualizar</button>
-                    <button type="button" class="btn btn-danger" onclick="">Eliminar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="actualizarAfiliado()">Actualizar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="">Eliminar</button>
                 </div>
 
             </div>
