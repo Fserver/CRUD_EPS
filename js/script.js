@@ -1,7 +1,7 @@
 let listaAfiliados = [], listaUsers = [],
     selectTipoDocumento, campoNumeroDocumento, campoNombre, selectAfiliacion, campoPassword,
     selectTipoDocumentoAfiliado, campoNumeroDocumentoAfiliado, campoNombreAfiliado, campoFechaAfiliado,
-    ultimoElementoContador, registroEncontrado, 
+    ultimoElementoContador, registroEncontrado,
     usuarioLogueado = null
 
 // 0
@@ -119,29 +119,31 @@ function registrarUsuario() {
 function registrarCitaAfiliado() {
     event.preventDefault()
 
-    selectTipoDocumentoAfiliado = document.getElementById('selectTipoDocumentoAfiliado').value
+    selectTipoDocumentoAfiliado = document.getElementById('selectTipoDocumentoAfiliado').options
+    textoTipoDocumentoAfiliado = selectTipoDocumentoAfiliado[selectTipoDocumentoAfiliado.selectedIndex].text
+    
     campoNumeroDocumentoAfiliado = document.getElementById('campoNumeroDocumentoAfiliado').value
     campoNombreAfiliado = document.getElementById('campoNombreAfiliado').value.toUpperCase()
     campoFechaAfiliado = document.getElementById('campoFechaAfiliado').value
-    selectEspecialidadAfiliado = document.getElementById('selectEspecialidadAfiliado').value
 
-    console.log(campoFechaAfiliado);
+    selectEspecialidadAfiliado = document.getElementById('selectEspecialidadAfiliado').options
+    textoEspecialidadAfiliado = selectEspecialidadAfiliado[selectEspecialidadAfiliado.selectedIndex].text
 
     if (campoNumeroDocumentoAfiliado != "" && campoNombreAfiliado != "" && campoFechaAfiliado != "") {
         listaAfiliados = leerLocalStorageAfiliados()
 
         if (listaAfiliados.find(elemento => elemento.numeroDocumento == campoNumeroDocumentoAfiliado) == undefined) {
             listaAfiliados.push({
-                tipoDocumento: selectTipoDocumentoAfiliado,
+                tipoDocumento: textoTipoDocumentoAfiliado,
                 numeroDocumento: campoNumeroDocumentoAfiliado,
                 nombre: campoNombreAfiliado,
                 fecha: campoFechaAfiliado,
-                especialista: selectEspecialidadAfiliado
+                especialista: textoEspecialidadAfiliado
             },)
             localStorage.removeItem('1')
             localStorage.setItem('1', JSON.stringify(listaAfiliados))
 
-            alert("Registro realizado con exito.", "success")
+            location.reload()
         } else {
             alert("El afiliado ya existe y no puede ser añadido nuevamente", "danger")
         }
@@ -167,124 +169,109 @@ function destruirSesion() {
     window.location.href = "login.html"
 }
 
+//RECARGAR TABLAS
+(function () {
+    
+    listaAfiliados = leerLocalStorageAfiliados()
+
+    //Imprime cada registro del LocalStorage en el <tbody> de la página index.html
+    let tbodyAfiliados = document.getElementById('tbodyAfiliados')
+    let tableRow, tdTipoDocumentoAfiliado, tdNumeroDocumentoAfiliado, tdNombreAfiliado, tdFechaAfiliado, tdEspecialidadAfiliado, accionEspecial
+
+    listaAfiliados.forEach(element => {
+        tableRow = document.createElement('tr')
+
+        tdTipoDocumentoAfiliado = document.createElement('td')
+        tdTipoDocumentoAfiliado.innerText = element.tipoDocumento
+
+        tdNumeroDocumentoAfiliado = document.createElement('td')
+        tdNumeroDocumentoAfiliado.innerText = element.numeroDocumento
+
+        tdNombreAfiliado = document.createElement('td')
+        tdNombreAfiliado.innerText = element.nombre
+
+        tdFechaAfiliado = document.createElement('td')
+        tdFechaAfiliado.innerText = element.fecha
+
+        tdEspecialidadAfiliado = document.createElement('td')
+        tdEspecialidadAfiliado.innerText = element.especialista
+
+        accionEspecial = document.createElement('td')
+        accionEspecial.innerHTML = "<button class='btn btn-info boton-afiliado'>Editar/Eliminar</button>"
 
 
+        tableRow.appendChild(tdTipoDocumentoAfiliado)
+        tableRow.appendChild(tdNumeroDocumentoAfiliado)
+        tableRow.appendChild(tdNombreAfiliado)
+        tableRow.appendChild(tdFechaAfiliado)
+        tableRow.appendChild(tdEspecialidadAfiliado)
+        tableRow.appendChild(accionEspecial)
 
-// function eliminarCliente() {
-//     event.preventDefault()
+        try {
+            tbodyAfiliados.appendChild(tableRow)
+        } catch (error) { }
+    })
 
-//     campoCedula = document.getElementById('campoCedula').value
-
-//     if (campoCedula !== "") {
-//         listaClientes = leerLocalStorage()
-
-//         let registroEncontrado = listaClientes.find(elemento => elemento.cedula == campoCedula)
-
-//         if (registroEncontrado !== undefined) {
-//             listaClientes = listaClientes.filter(registro => registro.cedula !== registroEncontrado.cedula)
-
-//             localStorage.clear()
-//             localStorage.setItem(0, JSON.stringify(listaClientes))
-
-//             alert(registroEncontrado.nombre + " fue eliminado.");
-//         } else {
-//             document.getElementById('campoNombre').value = ""
-//             alert("Este cliente No existe.")
-//         }
-//     } else alert("Debe digitar una cédula existente para eliminar.")
-
-//     document.getElementById('formularioClientes').reset()
-// }
-
-// function actualizarCliente() {
-//     event.preventDefault()
-
-//     campoCedula = document.getElementById('campoCedula').value
-
-//     if (campoCedula !== "") {
-//         listaClientes = leerLocalStorage()
-
-//         let registroEncontrado = listaClientes.find(elemento => elemento.cedula == campoCedula)
-
-//         if (registroEncontrado !== undefined) {
-
-//             campoNombre = document.getElementById('campoNombre').value
-
-//             alert(registroEncontrado.nombre + " fue actualizado a: " + campoNombre);
-//             registroEncontrado.nombre = campoNombre
-
-//             console.log(registroEncontrado);
-//             console.log(listaClientes);
-
-//             localStorage.clear()
-//             localStorage.setItem(0, JSON.stringify(listaClientes))
-
-//         } else {
-//             document.getElementById('campoNombre').value = ""
-//             alert("Este cliente No existe.")
-//         }
-//     } else alert("Debe llenar ambos campos para Actualizar.")
-
-//     document.getElementById('formularioClientes').reset()
-// }
-
-// (function () {
-//     listaClientes = leerLocalStorage()
-
-//     //Imprime cada registro del LocalStorage en el <select> de la página ventas.html
-//     let selectClientes = document.getElementById('selectClientes')
-//     let clienteVenta
-//     listaClientes.forEach((element) => {
-
-//         clienteVenta = document.createElement('option')
-//         clienteVenta.value = element.cedula
-//         clienteVenta.text = element.nombre
-//         try {
-//             selectClientes.appendChild(clienteVenta)
-//         } catch (error) { }
-//     });
+})()
 
 
+    // function eliminarCliente() {
+    //     event.preventDefault()
 
+    //     campoCedula = document.getElementById('campoCedula').value
 
-//     //Imprime cada registro del LocalStorage en el <tbody> de la página index.html
-//     let tbodyClientes = document.getElementById('tbody')
-//     let tableRow, clienteCedula, clienteNombre, clienteVentas, totalVentas, temporal = 0
+    //     if (campoCedula !== "") {
+    //         listaClientes = leerLocalStorage()
 
-//     listaClientes.forEach(element => {
-//         tableRow = document.createElement('tr')
+    //         let registroEncontrado = listaClientes.find(elemento => elemento.cedula == campoCedula)
 
-//         clienteCedula = document.createElement('td')
-//         clienteCedula.innerText = element.cedula
+    //         if (registroEncontrado !== undefined) {
+    //             listaClientes = listaClientes.filter(registro => registro.cedula !== registroEncontrado.cedula)
 
-//         clienteNombre = document.createElement('td')
-//         clienteNombre.innerText = element.nombre
+    //             localStorage.clear()
+    //             localStorage.setItem(0, JSON.stringify(listaClientes))
 
-//         clienteVentas = document.createElement('td')
+    //             alert(registroEncontrado.nombre + " fue eliminado.");
+    //         } else {
+    //             document.getElementById('campoNombre').value = ""
+    //             alert("Este cliente No existe.")
+    //         }
+    //     } else alert("Debe digitar una cédula existente para eliminar.")
 
-//         totalVentas = document.createElement('td')
+    //     document.getElementById('formularioClientes').reset()
+    // }
 
-//         element.ventas.forEach(element2 => {
-//             clienteVentas.innerText += JSON.stringify(element2.producto) + ", "
+    // function actualizarCliente() {
+    //     event.preventDefault()
 
-//             //Se hace la sumatoria de las ventas por Cliente
-//             temporal += parseInt(element2.valor)
-//         });
-//         totalVentas.innerText = temporal
-//         temporal = 0
+    //     campoCedula = document.getElementById('campoCedula').value
 
-//         tableRow.appendChild(clienteCedula)
-//         tableRow.appendChild(clienteNombre)
-//         tableRow.appendChild(clienteVentas)
-//         tableRow.appendChild(totalVentas)
+    //     if (campoCedula !== "") {
+    //         listaClientes = leerLocalStorage()
 
-//         try {
-//             tbodyClientes.appendChild(tableRow)
-//         } catch (error) { }
-//     });
+    //         let registroEncontrado = listaClientes.find(elemento => elemento.cedula == campoCedula)
 
-// })()
+    //         if (registroEncontrado !== undefined) {
 
+    //             campoNombre = document.getElementById('campoNombre').value
+
+    //             alert(registroEncontrado.nombre + " fue actualizado a: " + campoNombre);
+    //             registroEncontrado.nombre = campoNombre
+
+    //             console.log(registroEncontrado);
+    //             console.log(listaClientes);
+
+    //             localStorage.clear()
+    //             localStorage.setItem(0, JSON.stringify(listaClientes))
+
+    //         } else {
+    //             document.getElementById('campoNombre').value = ""
+    //             alert("Este cliente No existe.")
+    //         }
+    //     } else alert("Debe llenar ambos campos para Actualizar.")
+
+    //     document.getElementById('formularioClientes').reset()
+    // }
 
 //Aqui se esconde como imprimir todas las ventas por 1 cliente
 // function buscarVenta() {
