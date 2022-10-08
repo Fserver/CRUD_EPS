@@ -8,8 +8,8 @@ let listaAfiliados = [], listaUsers = [],
 function leerLocalStorage() {
     listaUsers = []
 
-    JSON.parse(localStorage.getItem(0)) !== null ?
-        listaUsers = JSON.parse(localStorage.getItem(0))
+    JSON.parse(localStorage.getItem('0')) !== null ?
+        listaUsers = JSON.parse(localStorage.getItem('0'))
         :
         console.log("No hay localStorage en el momento");
 
@@ -20,8 +20,8 @@ function leerLocalStorage() {
 function leerLocalStorageAfiliados() {
     listaAfiliados = []
 
-    JSON.parse(localStorage.getItem(1)) !== null ?
-        listaAfiliados = JSON.parse(localStorage.getItem(1))
+    JSON.parse(localStorage.getItem('1')) !== null ?
+        listaAfiliados = JSON.parse(localStorage.getItem('1'))
         :
         console.log("No hay localStorage en el momento");
 
@@ -104,8 +104,8 @@ function registrarUsuario() {
                 nombre: campoNombre,
                 password: campoPassword
             },)
-            localStorage.removeItem(0)
-            localStorage.setItem(0, JSON.stringify(listaUsers))
+            localStorage.removeItem('0')
+            localStorage.setItem('0', JSON.stringify(listaUsers))
 
             alert("Registro realizado con exito.", "success")
         } else {
@@ -138,8 +138,8 @@ function registrarCitaAfiliado() {
                 fecha: campoFechaAfiliado,
                 especialista: selectEspecialidadAfiliado
             },)
-            localStorage.removeItem(1)
-            localStorage.setItem(1, JSON.stringify(listaAfiliados))
+            localStorage.removeItem('1')
+            localStorage.setItem('1', JSON.stringify(listaAfiliados))
 
             alert("Registro realizado con exito.", "success")
         } else {
