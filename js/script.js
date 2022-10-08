@@ -160,7 +160,11 @@ function registrarCitaAfiliado() {
 
         if (usuarioLogueado != null) {
             document.getElementById('usuarioActivo').innerText = "Hola, " + usuarioLogueado.user
-        } else window.location.href = "login.html"
+        } else {
+            setTimeout(() => {
+                window.location.href = "login.html"
+            }, 500);
+        }
     }
 })()
 
