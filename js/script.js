@@ -155,6 +155,8 @@ function registrarCitaAfiliado() {
 //COMPROBADOR DE SESIÓN
 (function () {
 
+    console.log(window.location.pathname);
+
     if (window.location.pathname != "/login.html") {
         usuarioLogueado = JSON.parse(sessionStorage.getItem('sesion'))
 
@@ -163,7 +165,7 @@ function registrarCitaAfiliado() {
         } else {
             setTimeout(() => {
                 window.location.href = "login.html"
-            }, 2500);
+            }, 10000);
         }
     } if (window.location.pathname == "/login.html") {
         console.log("estas en el login");
