@@ -156,7 +156,17 @@ function registrarCitaAfiliado() {
 (function () {
 
     console.log(window.location.pathname);
+    usuarioLogueado = JSON.parse(sessionStorage.getItem('sesion'))
+    console.log(usuarioLogueado);
 
+    if (window.location.pathname != "/login.html") {
+
+
+        window.location.href = "/login.html"
+    } else {
+        
+    }
+/*
     if (window.location.pathname != "/login.html") {
         usuarioLogueado = JSON.parse(sessionStorage.getItem('sesion'))
 
@@ -170,6 +180,8 @@ function registrarCitaAfiliado() {
     } if (window.location.pathname == "/login.html") {
         console.log("estas en el login");
     }
+
+    */
 })()
 
 function destruirSesion() {
