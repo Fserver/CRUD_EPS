@@ -163,8 +163,10 @@ function registrarCitaAfiliado() {
         } else {
             setTimeout(() => {
                 window.location.href = "login.html"
-            }, 1000);
+            }, 500);
         }
+    } if (window.location.pathname == "/login.html") {
+        console.log("estas en el login");
     }
 })()
 
