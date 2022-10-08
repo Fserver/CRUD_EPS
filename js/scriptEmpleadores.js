@@ -168,7 +168,7 @@ function destruirSesion() {
         tdRegimen.innerText = element.regimen
 
         accionEspecial = document.createElement('td')
-        accionEspecial.innerHTML = `<button class='btn btn-warning click' id='${element.numeroDocumento}' onclick='cargarListaAfiliados(this.id)' data-bs-toggle='modal' data-bs-target='#modalRegistroAfiliados'>Editar/Eliminar</button>`
+        accionEspecial.innerHTML = `<button class='btn btn-warning click' id='${element.numeroDocumento}' onclick='cargarListaEmpleador(this.id)' data-bs-toggle='modal' data-bs-target='#modalRegistroEmpleador'>Editar/Eliminar</button>`
 
         tableRow.appendChild(tdTipoDocumentoEmpleador)
         tableRow.appendChild(tdNumeroDocumentoEmpleador)
@@ -202,22 +202,25 @@ function eliminarAfiliado() {
     location.reload()
 }
 
-function cargarListaAfiliados(id) {
+function cargarListaEmpleador(id) {
     event.preventDefault()
 
-    listaAfiliados = leerLocalStorageAfiliados()
+    listaEmpleador = leerLocalStorageAEmpleador()
 
-    let registroEncontrado = listaAfiliados.find(elemento => elemento.numeroDocumento == id)
+    registroEncontrado = listaEmpleador.find(elemento => elemento.numeroDocumento == id)
 
-    //console.log(TIPO_DOCUMENTO.indexOf(registroEncontrado.tipoDocumento));
-    document.getElementById('selectTipoDocumentoAfiliadoUpdate').value = TIPO_DOCUMENTO.indexOf(registroEncontrado.tipoDocumento)
+    document.getElementById('selectTipoDocumentoEmpleadorUpdate').value = TIPO_DOCUMENTO.indexOf(registroEncontrado.tipoDocumento)
 
-    document.getElementById('campoNumeroDocumentoAfiliadoUpdate').value = registroEncontrado.numeroDocumento
-    document.getElementById('campoNombreAfiliadoUpdate').value = registroEncontrado.nombre
-    document.getElementById('campoFechaAfiliadoUpdate').value = registroEncontrado.fecha
+    document.getElementById('campoNumeroDocumentoEmpleadorUpdate').value = registroEncontrado.numeroDocumento
+    document.getElementById('campoEmpresaEmpleadorUpdate').value = registroEncontrado.empresa
 
-    //console.log(TIPO_DOCUMENTO.indexOf(registroEncontrado.especialista));
-    document.getElementById('selectEspecialidadAfiliadoUpdate').value = ESPECIALIDAD.indexOf(registroEncontrado.especialista)
+    document.getElementById('selectCiudadEmpleadorUpdate').value = CIUDAD.indexOf(registroEncontrado.ciudad)
+
+    document.getElementById('campoDireccionEmpleadorUpdate').value = registroEncontrado.direccion
+    document.getElementById('campoEmailEmpleadorUpdate').value = registroEncontrado.email
+    document.getElementById('campoCodigoPostalEmpleadorUpdate').value = registroEncontrado.codigoPostal
+
+    document.getElementById('selectRegimenEmpleadorUpdate').value = REGIMEN.indexOf(registroEncontrado.regimen)
 
     registroEditar = id
 }
