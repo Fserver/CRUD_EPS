@@ -197,7 +197,7 @@ function destruirSesion() {
         tdEspecialidadAfiliado.innerText = element.especialista
 
         accionEspecial = document.createElement('td')
-        accionEspecial.innerHTML = "<button class='btn btn-info boton-afiliado'>Editar/Eliminar</button>"
+        accionEspecial.innerHTML = "<button class='btn btn-warning boton-afiliado' data-bs-toggle='modal' data-bs-target='#modalRegistroAfiliados'>Editar/Eliminar</button>"
 
 
         tableRow.appendChild(tdTipoDocumentoAfiliado)

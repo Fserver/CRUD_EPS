@@ -126,6 +126,69 @@
     </div>
 
 
+
+    <!-- MODAL OCULTO - FORMULARIO REGISTRO -->
+    <div class="modal fade" id="modalRegistroAfiliados" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Formulario de Actualización</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form id="formularioRegistroAfiliados" action="">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Tipo de Documento</label>
+                            <select class="form-select" id="selectTipoDocumentoAfiliado"
+                                aria-label="Default select example">
+                                <option value="1">Cédula de Ciudadanía</option>
+                                <option value="2">Cédula de Extranjería</option>
+                                <option value="3">Tarjeta de Identidad</option>
+                                <option value="4">Registro Civíl</option>
+                                <option value="5">Otro</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput2" class="form-label"># Documento</label>
+                            <input type="number" class="form-control" id="campoNumeroDocumentoAfiliado" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput3" class="form-label">Paciente</label>
+                            <input type="text" class="form-control" id="campoNombreAfiliado" minlength="10" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput4" class="form-label">Fecha y Hora</label>
+                            <input type="datetime-local" class="form-control" id="campoFechaAfiliado" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Especialidad</label>
+                            <select class="form-select" id="selectEspecialidadAfiliado"
+                                aria-label="Default select example">
+                                <option value="MÉDICO GENERAL">MÉDICO GENERAL</option>
+                                <option value="OFTALMOLOGÍA">OFTALMOLOGÍA</option>
+                                <option value="PEDIATRÍA">PEDIATRÍA</option>
+                                <option value="GINECOLOGÍA">GINECOLOGÍA</option>
+                                <option value="ODONTOLOGÍA">ODONTOLOGÍA</option>
+                            </select>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="">Actualizar</button>
+                    <button type="button" class="btn btn-danger" onclick="">Eliminar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
     <script src="js/jquery-3.5.1.js"></script>
     <script src="js/jquery.dataTables.min.js"></script>
     <script src="js/dataTables.bootstrap5.min.js"></script>
