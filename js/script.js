@@ -163,7 +163,7 @@ function registrarCitaAfiliado() {
         } else {
             setTimeout(() => {
                 window.location.href = "login.html"
-            }, 500);
+            }, 1000);
         }
     }
 })()
