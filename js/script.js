@@ -1,8 +1,22 @@
 let listaAfiliados = [], listaUsers = [],
     selectTipoDocumento, campoNumeroDocumento, campoNombre, selectAfiliacion, campoPassword,
     selectTipoDocumentoAfiliado, campoNumeroDocumentoAfiliado, campoNombreAfiliado, campoFechaAfiliado,
-    ultimoElementoContador, registroEncontrado, registroEditar
-usuarioLogueado = null
+    ultimoElementoContador, registroEncontrado, registroEditar,
+    usuarioLogueado = null
+
+const TIPO_DOCUMENTO = [
+    "Cédula de Ciudadanía",     //0
+    "Cédula de Extranjería",    //1
+    "Tarjeta de Identidad0",    //2
+    "Registro Civíl",           //3
+    "Otro"                      //4
+], ESPECIALIDAD = [
+    "MÉDICO GENERAL",           //0
+    "OFTALMOLOGÍA",             //1
+    "PEDIATRÍA",                //2
+    "GINECOLOGÍA",              //3
+    "ODONTOLOGÍA"               //4
+]
 
 // 0
 function leerLocalStorage() {
@@ -154,17 +168,11 @@ function registrarCitaAfiliado() {
 
 //COMPROBADOR DE SESIÓN
 (function () {
-
-    console.log(window.location.pathname);
     usuarioLogueado = JSON.parse(sessionStorage.getItem('sesion'))
-    console.log(usuarioLogueado);
 
     if (window.location.pathname != "/login.html" && usuarioLogueado == null) {
-
         window.location.href = "/login.html"
-    } else {
-        
-    }
+    } else { }
 
 })()
 
@@ -223,7 +231,7 @@ function eliminarAfiliado() {
 
     listaAfiliados = leerLocalStorageAfiliados()
 
-    listaAfiliados = listaAfiliados.filter(registro => registro.numeroDocumento !== registroEditar)
+    listaAfiliados = listaAfiliados.filter(registro => registro.numeroDocumento != registroEditar)
 
     localStorage.removeItem('1')
     localStorage.setItem('1', JSON.stringify(listaAfiliados))
@@ -233,7 +241,6 @@ function eliminarAfiliado() {
     location.reload()
 }
 
-
 function cargarListaAfiliados(id) {
     event.preventDefault()
 
@@ -241,13 +248,15 @@ function cargarListaAfiliados(id) {
 
     let registroEncontrado = listaAfiliados.find(elemento => elemento.numeroDocumento == id)
 
-    document.getElementById('selectTipoDocumentoAfiliadoUpdate').value = 0
+    //console.log(TIPO_DOCUMENTO.indexOf(registroEncontrado.tipoDocumento));
+    document.getElementById('selectTipoDocumentoAfiliadoUpdate').value = TIPO_DOCUMENTO.indexOf(registroEncontrado.tipoDocumento)
 
     document.getElementById('campoNumeroDocumentoAfiliadoUpdate').value = registroEncontrado.numeroDocumento
     document.getElementById('campoNombreAfiliadoUpdate').value = registroEncontrado.nombre
     document.getElementById('campoFechaAfiliadoUpdate').value = registroEncontrado.fecha
 
-    document.getElementById('selectEspecialidadAfiliadoUpdate').value = 0
+    //console.log(TIPO_DOCUMENTO.indexOf(registroEncontrado.especialista));
+    document.getElementById('selectEspecialidadAfiliadoUpdate').value = ESPECIALIDAD.indexOf(registroEncontrado.especialista)
 
     registroEditar = id
 }
