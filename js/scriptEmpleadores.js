@@ -1,13 +1,14 @@
 let listaEmpleador = [],
     //Select
     selectTipoDocumentoEmpleador, selectCiudadEmpleador, selectRegimenEmpleador,
+    selectTipoDocumentoEmpleadorUpdate, selectCiudadEmpleadorUpdate, selectRegimenEmpleadorUpdate,
     //Auxiliar Select
     textoTipoDocumentoEmpleador, textoCiudadEmpleador, textoRegimenEmpleador,
     //Campo
     campoNumeroDocumentoEmpleador, campoDireccionEmpleador, campoEmailEmpleador, campoCodigoPostalEmpleador,
-
-    ultimoElementoContador, registroEncontrado, registroEditar,
-    usuarioLogueado = null
+    campoNumeroDocumentoEmpleadorUpdate, campoEmpresaEmpleadorUpdate, campoDireccionEmpleadorUpdate, campoEmailEmpleadorUpdate, campoCodigoPostalEmpleadorUpdate,
+    //Variables Auxiliares de información temporal
+    registroEncontrado, registroEditar, usuarioLogueado = null
 
 const TIPO_DOCUMENTO = [
     "Cédula de Ciudadanía",     //0
@@ -160,10 +161,10 @@ function destruirSesion() {
 
         tdEmail = document.createElement('td')
         tdEmail.innerText = element.email
-        
+
         tdCodigoPostal = document.createElement('td')
         tdCodigoPostal.innerText = element.codigoPostal
-        
+
         tdRegimen = document.createElement('td')
         tdRegimen.innerText = element.regimen
 
@@ -190,12 +191,12 @@ function destruirSesion() {
 function eliminarAfiliado() {
     event.preventDefault()
 
-    listaAfiliados = leerLocalStorageAfiliados()
+    listaEmpleador = leerLocalStorageAEmpleador()
 
-    listaAfiliados = listaAfiliados.filter(registro => registro.numeroDocumento != registroEditar)
+    listaEmpleador = listaEmpleador.filter(registro => registro.numeroDocumento != registroEditar)
 
-    localStorage.removeItem('1')
-    localStorage.setItem('1', JSON.stringify(listaAfiliados))
+    localStorage.removeItem('2')
+    localStorage.setItem('2', JSON.stringify(listaEmpleador))
 
     alert("Registro eliminado.", "danger");
 
@@ -225,32 +226,49 @@ function cargarListaEmpleador(id) {
     registroEditar = id
 }
 
-function actualizarAfiliado() {
+function actualizarEmpleador() {
     event.preventDefault()
 
-    campoNumeroDocumentoAfiliado = document.getElementById('campoNumeroDocumentoAfiliadoUpdate').value
-    campoNombreAfiliado = document.getElementById('campoNombreAfiliadoUpdate').value.toUpperCase()
-    campoFechaAfiliado = document.getElementById('campoFechaAfiliadoUpdate').value
+    selectTipoDocumentoEmpleadorUpdate = document.getElementById('selectTipoDocumentoEmpleadorUpdate').options
 
-    if (campoNumeroDocumentoAfiliado != "" && campoNombreAfiliado != "" && campoFechaAfiliado != "") {
-        listaAfiliados = leerLocalStorageAfiliados()
+    campoNumeroDocumentoEmpleadorUpdate = document.getElementById('campoNumeroDocumentoEmpleadorUpdate').value
+    campoEmpresaEmpleadorUpdate = document.getElementById('campoEmpresaEmpleadorUpdate').value
 
-        let registroEncontrado = listaAfiliados.find(elemento => elemento.numeroDocumento == registroEditar)
+    selectCiudadEmpleadorUpdate = document.getElementById('selectCiudadEmpleadorUpdate').options
 
-        selectTipoDocumentoAfiliadoUpdate = document.getElementById('selectTipoDocumentoAfiliadoUpdate').options
-        registroEncontrado.tipoDocumento = selectTipoDocumentoAfiliadoUpdate[selectTipoDocumentoAfiliadoUpdate.selectedIndex].text
+    campoDireccionEmpleadorUpdate = document.getElementById('campoDireccionEmpleadorUpdate').value
+    campoEmailEmpleadorUpdate = document.getElementById('campoEmailEmpleadorUpdate').value
+    campoCodigoPostalEmpleadorUpdate = document.getElementById('campoCodigoPostalEmpleadorUpdate').value
 
-        registroEncontrado.numeroDocumento = document.getElementById('campoNumeroDocumentoAfiliadoUpdate').value
-        registroEncontrado.nombre = document.getElementById('campoNombreAfiliadoUpdate').value
-        registroEncontrado.fecha = document.getElementById('campoFechaAfiliadoUpdate').value
-
-        selectEspecialidadAfiliadoUpdate = document.getElementById('selectEspecialidadAfiliadoUpdate').options
-        console.log(selectEspecialidadAfiliadoUpdate[selectEspecialidadAfiliadoUpdate.selectedIndex].text);
-        registroEncontrado.especialista = selectEspecialidadAfiliadoUpdate[selectEspecialidadAfiliadoUpdate.selectedIndex].text
+    selectRegimenEmpleadorUpdate = document.getElementById('selectRegimenEmpleadorUpdate').value
 
 
-        localStorage.removeItem('1')
-        localStorage.setItem('1', JSON.stringify(listaAfiliados))
+    if (campoNumeroDocumentoEmpleadorUpdate != "" &&
+        campoEmpresaEmpleadorUpdate != "" &&
+        campoDireccionEmpleadorUpdate != "" &&
+        campoEmailEmpleadorUpdate != "" &&
+        campoCodigoPostalEmpleadorUpdate != "") {
+
+        listaEmpleador = leerLocalStorageAEmpleador()
+
+        registroEncontrado = listaEmpleador.find(elemento => elemento.numeroDocumento == registroEditar)
+
+        registroEncontrado.tipoDocumento = selectTipoDocumentoEmpleadorUpdate[selectTipoDocumentoEmpleadorUpdate.selectedIndex].text
+
+        registroEncontrado.numeroDocumento = campoNumeroDocumentoEmpleadorUpdate
+        registroEncontrado.empresa = campoEmpresaEmpleadorUpdate.toUpperCase()
+
+        registroEncontrado.ciudad = selectCiudadEmpleadorUpdate[selectCiudadEmpleadorUpdate.selectedIndex].text
+
+        registroEncontrado.direccion = campoDireccionEmpleadorUpdate
+        registroEncontrado.email = campoEmailEmpleadorUpdate
+        registroEncontrado.codigoPostal = campoCodigoPostalEmpleadorUpdate
+
+        registroEncontrado.regimen = selectRegimenEmpleadorUpdate[selectRegimenEmpleadorUpdate.selectedIndex].text
+
+
+        localStorage.removeItem('2')
+        localStorage.setItem('2', JSON.stringify(listaEmpleador))
 
         location.reload()
     } else alert("Se deben llenar todos los campos para hacer una actualización", "warning")
