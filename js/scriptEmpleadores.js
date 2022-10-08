@@ -29,7 +29,7 @@ const TIPO_DOCUMENTO = [
 ]
 
 // 1
-function leerLocalStorageAfiliados() {
+function leerLocalStorageAEmpleador() {
     listaEmpleador = []
 
     JSON.parse(localStorage.getItem('2')) !== null ?
@@ -91,7 +91,7 @@ function registrarCitaEmpleador() {
         campoCodigoPostalEmpleador != "" &&
         campoEmailEmpleador != "") {
 
-        listaEmpleador = leerLocalStorageAfiliados()
+        listaEmpleador = leerLocalStorageAEmpleador()
 
         if (listaEmpleador.find(elemento => elemento.numeroDocumento == campoNumeroDocumentoEmpleador) == undefined) {
             listaEmpleador.push({
@@ -134,38 +134,50 @@ function destruirSesion() {
 //RECARGAR TABLAS
 (function () {
 
-    listaAfiliados = leerLocalStorageAfiliados()
+    listaEmpleador = leerLocalStorageAEmpleador()
 
     //Imprime cada registro del LocalStorage en el <tbody> de la página index.html
-    let tbodyAfiliados = document.getElementById('tbodyAfiliados')
-    let tableRow, tdTipoDocumentoAfiliado, tdNumeroDocumentoAfiliado, tdNombreAfiliado, tdFechaAfiliado, tdEspecialidadAfiliado, accionEspecial
+    let tbodyAfiliados = document.getElementById('tbodyEmpleador')
+    let tableRow, tdTipoDocumentoEmpleador, tdEmpresa, tdCiudadEmpleador, tdDireccionEmpleador, tdEmail, tdCodigoPostal, tdRegimen
 
-    listaAfiliados.forEach(element => {
+    listaEmpleador.forEach(element => {
         tableRow = document.createElement('tr')
 
-        tdTipoDocumentoAfiliado = document.createElement('td')
-        tdTipoDocumentoAfiliado.innerText = element.tipoDocumento
+        tdTipoDocumentoEmpleador = document.createElement('td')
+        tdTipoDocumentoEmpleador.innerText = element.tipoDocumento
 
-        tdNumeroDocumentoAfiliado = document.createElement('td')
-        tdNumeroDocumentoAfiliado.innerText = element.numeroDocumento
+        tdNumeroDocumentoEmpleador = document.createElement('td')
+        tdNumeroDocumentoEmpleador.innerText = element.numeroDocumento
 
-        tdNombreAfiliado = document.createElement('td')
-        tdNombreAfiliado.innerText = element.nombre
+        tdEmpresa = document.createElement('td')
+        tdEmpresa.innerText = element.empresa
 
-        tdFechaAfiliado = document.createElement('td')
-        tdFechaAfiliado.innerText = element.fecha
+        tdCiudadEmpleador = document.createElement('td')
+        tdCiudadEmpleador.innerText = element.ciudad
 
-        tdEspecialidadAfiliado = document.createElement('td')
-        tdEspecialidadAfiliado.innerText = element.especialista
+        tdDireccionEmpleador = document.createElement('td')
+        tdDireccionEmpleador.innerText = element.direccion
+
+        tdEmail = document.createElement('td')
+        tdEmail.innerText = element.email
+        
+        tdCodigoPostal = document.createElement('td')
+        tdCodigoPostal.innerText = element.codigoPostal
+        
+        tdRegimen = document.createElement('td')
+        tdRegimen.innerText = element.regimen
 
         accionEspecial = document.createElement('td')
         accionEspecial.innerHTML = `<button class='btn btn-warning click' id='${element.numeroDocumento}' onclick='cargarListaAfiliados(this.id)' data-bs-toggle='modal' data-bs-target='#modalRegistroAfiliados'>Editar/Eliminar</button>`
 
-        tableRow.appendChild(tdTipoDocumentoAfiliado)
-        tableRow.appendChild(tdNumeroDocumentoAfiliado)
-        tableRow.appendChild(tdNombreAfiliado)
-        tableRow.appendChild(tdFechaAfiliado)
-        tableRow.appendChild(tdEspecialidadAfiliado)
+        tableRow.appendChild(tdTipoDocumentoEmpleador)
+        tableRow.appendChild(tdNumeroDocumentoEmpleador)
+        tableRow.appendChild(tdEmpresa)
+        tableRow.appendChild(tdCiudadEmpleador)
+        tableRow.appendChild(tdDireccionEmpleador)
+        tableRow.appendChild(tdEmail)
+        tableRow.appendChild(tdCodigoPostal)
+        tableRow.appendChild(tdRegimen)
         tableRow.appendChild(accionEspecial)
 
         try {
