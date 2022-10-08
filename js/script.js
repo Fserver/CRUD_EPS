@@ -159,29 +159,13 @@ function registrarCitaAfiliado() {
     usuarioLogueado = JSON.parse(sessionStorage.getItem('sesion'))
     console.log(usuarioLogueado);
 
-    if (window.location.pathname != "/login.html") {
-
+    if (window.location.pathname != "/login.html" && usuarioLogueado == null) {
 
         window.location.href = "/login.html"
     } else {
         
     }
-/*
-    if (window.location.pathname != "/login.html") {
-        usuarioLogueado = JSON.parse(sessionStorage.getItem('sesion'))
 
-        if (usuarioLogueado != null) {
-            document.getElementById('usuarioActivo').innerText = "Hola, " + usuarioLogueado.user
-        } else {
-            setTimeout(() => {
-                window.location.href = "login.html"
-            }, 10000);
-        }
-    } if (window.location.pathname == "/login.html") {
-        console.log("estas en el login");
-    }
-
-    */
 })()
 
 function destruirSesion() {
