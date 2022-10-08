@@ -34,22 +34,231 @@
                     </li>
                 </ul>
             </div>
-
-            <div class="d-flex align-items-end flex-column ms-auto mt-2">
-                <p id="usuarioActivo"></p>
-            </div>
         </div>
     </nav>
 
+    <!-- ALERTA -->
+    <div class="d-flex flex-column justify-content-center d-block" id="liveAlertPlaceholder"
+        style="position: absolute; z-index: 2056;"></div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <h2 class="display-5">Formulario</h2>
+
+            <form class="row" id="formularioRegistroEmpleador" action="">
+
+                <!-- IZQUIERDO -->
+                <div class="col-md-6">
+                    <div class="mb-3 form-group">
+                        <label for="exampleFormControlInput1" class="form-label">Tipo de Documento</label>
+                        <select class="form-select" id="selectTipoDocumentoEmpleador"
+                            aria-label="Default select example">
+                            <option value="0">Cédula de Ciudadanía</option>
+                            <option value="1">Cédula de Extranjería</option>
+                            <option value="2">Tarjeta de Identidad</option>
+                            <option value="3">Registro Civíl</option>
+                            <option value="4">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label for="exampleFormControlInput3" class="form-label">Empresa</label>
+                        <input type="text" class="form-control" id="campoEmpresaEmpleador" minlength="10" required>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label for="exampleFormControlInput3" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="campoDireccionEmpleador" minlength="10" required>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label for="exampleFormControlInput2" class="form-label">Código Postal</label>
+                        <input type="number" class="form-control" id="campoCodigoPostalEmpleador" required>
+                    </div>
+                </div>
+
+                <!-- DERECHO -->
+                <div class="col-md-6">
+                    <div class="mb-3 form-group">
+                        <label for="exampleFormControlInput2" class="form-label"># Documento</label>
+                        <input type="number" class="form-control" id="campoNumeroDocumentoEmpleador" required>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label for="exampleFormControlInput1" class="form-label">Ciudad</label>
+                        <select class="form-select" id="selectCiudadEmpleador" aria-label="Default select example">
+                            <option value="0">CALI</option>
+                            <option value="1">MEDELLÍN</option>
+                            <option value="2">BOGOTÁ</option>
+                            <option value="3">BUGA</option>
+                            <option value="4">BUENAVENTURA</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label for="exampleFormControlInput3" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="campoEmailEmpleador" minlength="10" required>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label for="exampleFormControlInput1" class="form-label">Régimen</label>
+                        <select class="form-select" id="selectRegimenEmpleador" aria-label="Default select example">
+                            <option value="0">RESPONSABLE DE IVA</option>
+                            <option value="1">PERSONA NATURAL RESPONSABLE DE IVA</option>
+                            <option value="2">ESPECIAL</option>
+                            <option value="3">PERSONA NATURAL NO RESPONSABLE DE IVA</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-check my-3">
+                        <input type="checkbox" class="form-check-input" id="checkEmpleador">
+                        <label class="form-check-label" for="exampleCheck1">Estoy de acuerdo</label>
+                    </div>
+                </div>
 
 
-        <!-- ALERTA -->
-        <div class="d-flex flex-column justify-content-center d-block" id="liveAlertPlaceholder"
-            style="position: relative; z-index: 1056; top: -9em;"></div>
+                <div>
+                    <button type="button" class="btn btn-primary" onclick="registrarCitaEmpleador()">Registrar</button>
+                    <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">Limpiar
+                        formulario</button>
+                </div>
+            </form>
+        </div>
 
 
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/script.js"></script>
+        <!-- TABLA -->
+        <div class="col-12 mt-4">
+            <h2 class="display-5">Listado Empresas</h2>
+
+            <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Tipo Documento</th>
+                        <th>Número Documento</th>
+                        <th>Empresa</th>
+                        <th>Ciudad</th>
+                        <th>Direccion</th>
+                        <th>Email</th>
+                        <th>Codigo Postal</th>
+                        <th>Regimen</th>
+                        <th>Editar/Eliminar</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tbodyEmpleador"></tbody>
+
+                <tfoot>
+                    <tr>
+                        <th>Tipo Documento</th>
+                        <th>Número Documento</th>
+                        <th>Empresa</th>
+                        <th>Ciudad</th>
+                        <th>Direccion</th>
+                        <th>Email</th>
+                        <th>Codigo Postal</th>
+                        <th>Regimen</th>
+                        <th>Editar/Eliminar</th>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+
+
+
+    <!-- MODAL OCULTO - FORMULARIO REGISTRO -->
+    <div class="modal fade" id="modalRegistroEmpleador" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Formulario de Actualización</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form id="formularioModificaEmpleador" action="">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Tipo de Documento</label>
+                            <select class="form-select" id="selectTipoDocumentoAfiliadoUpdate"
+                                aria-label="Default select example">
+                                <option value="0">Cédula de Ciudadanía</option>
+                                <option value="1">Cédula de Extranjería</option>
+                                <option value="2">Tarjeta de Identidad</option>
+                                <option value="3">Registro Civíl</option>
+                                <option value="4">Otro</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput2" class="form-label"># Documento</label>
+                            <input type="number" class="form-control" id="campoNumeroDocumentoAfiliadoUpdate" disabled>
+                        </div>
+                        <div class="mb-3 form-group">
+                            <label for="exampleFormControlInput3" class="form-label">Empresa</label>
+                            <input type="text" class="form-control" id="campoEmpresaEmpleador" minlength="10" required>
+                        </div>
+                        <div class="mb-3 form-group">
+                            <label for="exampleFormControlInput1" class="form-label">Ciudad</label>
+                            <select class="form-select" id="selectCiudadEmpleador" aria-label="Default select example">
+                                <option value="0">CALI</option>
+                                <option value="1">MEDELLÍN</option>
+                                <option value="2">BOGOTÁ</option>
+                                <option value="3">BUGA</option>
+                                <option value="4">BUENAVENTURA</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 form-group">
+                            <label for="exampleFormControlInput3" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="campoDireccionEmpleador" minlength="10" required>
+                        </div>
+                        <div class="mb-3 form-group">
+                            <label for="exampleFormControlInput3" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="campoEmailEmpleador" minlength="10" required>
+                        </div>
+                        <div class="mb-3 form-group">
+                            <label for="exampleFormControlInput2" class="form-label">Código Postal</label>
+                            <input type="number" class="form-control" id="campoCodigoPostalEmpleador" required>
+                        </div>
+                        <div class="mb-3 form-group">
+                            <label for="exampleFormControlInput1" class="form-label">Régimen</label>
+                            <select class="form-select" id="selectRegimenEmpleador" aria-label="Default select example">
+                                <option value="0">RESPONSABLE DE IVA</option>
+                                <option value="1">PERSONA NATURAL RESPONSABLE DE IVA</option>
+                                <option value="2">ESPECIAL</option>
+                                <option value="3">PERSONA NATURAL NO RESPONSABLE DE IVA</option>
+                            </select>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="actualizarAfiliado()">Actualizar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                        onclick="eliminarAfiliado()">Eliminar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="js/jquery-3.5.1.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap5.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/scriptEmpleadores.js"></script>
+
+    <script type="text/javascript" class="init">
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
 
 </body>
 
