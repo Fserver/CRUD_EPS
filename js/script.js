@@ -172,8 +172,9 @@ function registrarCitaAfiliado() {
 
     if (window.location.pathname != "/login.html" && usuarioLogueado == null) {
         window.location.href = "/login.html"
-    } else { }
-
+    } else { 
+        document.getElementById('usuarioActivo').innerText = "Hola, "+usuarioLogueado.user
+    }
 })()
 
 function destruirSesion() {

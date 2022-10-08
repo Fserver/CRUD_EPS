@@ -8,7 +8,7 @@ let listaEmpleador = [],
     campoNumeroDocumentoEmpleador, campoDireccionEmpleador, campoEmailEmpleador, campoCodigoPostalEmpleador,
     campoNumeroDocumentoEmpleadorUpdate, campoEmpresaEmpleadorUpdate, campoDireccionEmpleadorUpdate, campoEmailEmpleadorUpdate, campoCodigoPostalEmpleadorUpdate,
     //Variables Auxiliares de información temporal
-    registroEncontrado, registroEditar, usuarioLogueado = null
+    checkFormulario, registroEncontrado, registroEditar, usuarioLogueado = null
 
 const TIPO_DOCUMENTO = [
     "Cédula de Ciudadanía",     //0
@@ -85,8 +85,12 @@ function registrarCitaEmpleador() {
     selectRegimenEmpleador = document.getElementById('selectRegimenEmpleador').options
     textoRegimenEmpleador = selectRegimenEmpleador[selectRegimenEmpleador.selectedIndex].text
 
+    checkFormulario = document.getElementById('checkEmpleador').checked
+    console.log(checkFormulario);
 
-    if (campoNumeroDocumentoEmpleador != "" &&
+
+    if (checkFormulario == true && 
+        campoNumeroDocumentoEmpleador != "" &&
         campoEmpresaEmpleador != "" &&
         campoDireccionEmpleador != "" &&
         campoCodigoPostalEmpleador != "" &&
@@ -120,11 +124,13 @@ function registrarCitaEmpleador() {
 //COMPROBADOR DE SESIÓN
 (function () {
     usuarioLogueado = JSON.parse(sessionStorage.getItem('sesion'))
+    //console.log(usuarioLogueado.user);
 
     if (window.location.pathname != "/login.html" && usuarioLogueado == null) {
         window.location.href = "/login.html"
-    } else { }
-
+    } else { 
+        document.getElementById('usuarioActivo').innerText = "Hola, "+ usuarioLogueado.user
+    }
 })()
 
 function destruirSesion() {
