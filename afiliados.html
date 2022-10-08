@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EPS - Salud Primero</title>
-    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/dataTables.bootstrap5.min.css">
 </head>
 
 <body class="container">
@@ -44,11 +45,12 @@
 
     <div class="row mt-4">
         <div class="col-md-4">
+            <h2 class="display-5">Formulario</h2>
 
             <form id="formularioRegistroAfiliados" action="">
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Tipo de Documento</label>
-                    <select class="form-select" id="selectTipoDocumento" aria-label="Default select example">
+                    <select class="form-select" id="selectTipoDocumentoAfiliado" aria-label="Default select example">
                         <option value="1">Cédula de Ciudadanía</option>
                         <option value="2">Cédula de Extranjería</option>
                         <option value="3">Tarjeta de Identidad</option>
@@ -58,20 +60,19 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput2" class="form-label"># Documento</label>
-                    <input type="number" class="form-control" id="campoNumeroDocumento" placeholder="1.111.800.600"
-                        required>
+                    <input type="number" class="form-control" id="campoNumeroDocumentoAfiliado" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput3" class="form-label">Paciente</label>
-                    <input type="text" class="form-control" id="campoNombre" minlength="10" required>
+                    <input type="text" class="form-control" id="campoNombreAfiliado" minlength="10" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput4" class="form-label">Fecha y Hora</label>
-                    <input type="datetime-local" class="form-control" id="campoAfiliadoFecha" required>
+                    <input type="datetime-local" class="form-control" id="campoFechaAfiliado" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Especialidad</label>
-                    <select class="form-select" id="selectTipoDocumento" aria-label="Default select example">
+                    <select class="form-select" id="selectEspecialidadAfiliado" aria-label="Default select example">
                         <option value="1">MÉDICO GENERAL</option>
                         <option value="2">OFTALMOLOGÍA</option>
                         <option value="3">PEDIATRÍA</option>
@@ -81,14 +82,58 @@
                 </div>
 
                 <div>
-                    <button type="button" class="btn btn-primary" onclick="registrarAfiliado()">Registrar</button>
-                    <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">Limpiar formulario</button>
+                    <button type="button" class="btn btn-primary" onclick="registrarCitaAfiliado()">Registrar</button>
+                    <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">Limpiar
+                        formulario</button>
                 </div>
             </form>
 
         </div>
 
-        <div class="col-8">
+        <div class="col-8 mt-4">
+            <h2 class="display-5">Citas asignadas</h2>
+            
+            <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Tipo Documento</th>
+                        <th>Número Documento</th>
+                        <th>Nombre Paciente</th>
+                        <th>Fecha y Hora</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tiger Nixon</td>
+                        <td>System Architect</td>
+                        <td>Edinburgh</td>
+                        <td>61</td>
+                        <td>2011-04-25</td>
+                        <td>$320,800</td>
+                    </tr>
+
+                    <tr>
+                        <td>Donna Snider</td>
+                        <td>Customer Support</td>
+                        <td>New York</td>
+                        <td>27</td>
+                        <td>2011-01-25</td>
+                        <td>$112,000</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </tfoot>
+            </table>
 
         </div>
     </div>
@@ -99,8 +144,17 @@
         style="position: relative; z-index: 1056; top: -9em;"></div>
 
 
-    <script src="bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script src="js/jquery-3.5.1.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap5.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <script type="text/javascript" class="init">
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
 
 </body>
 

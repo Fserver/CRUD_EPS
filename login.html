@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EPS - Salud Primero</title>
-    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 
 <body class="container">
@@ -73,20 +73,12 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput2" class="form-label"># Documento</label>
                             <input type="number" class="form-control" id="campoNumeroDocumento"
-                                placeholder="1.111.800.600" required>
+                                placeholder="1.111.000.000" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput3" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="campoNombre"
                                 placeholder="Escriba su nombre aquí" minlength="10" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput4" class="form-label">Tipo de Afiliación</label>
-                            <select class="form-select" id="selectAfiliacion" aria-label="Default select example">
-                                <option value="1">Afiliado</option>
-                                <option value="2">Empleador</option>
-                                <option value="3">Independiente</option>
-                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput5" class="form-label">Contraseña</label>
@@ -98,7 +90,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiarFormulario()">Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick="registrarAfiliado()">Registrarse</button>
+                    <button type="button" class="btn btn-primary" onclick="registrarUsuario()">Registrarse</button>
                 </div>
 
             </div>
@@ -111,8 +103,8 @@
         style="position: relative; z-index: 1056; top: -9em;"></div>
 
 
-    <script src="bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
 
 </body>
 

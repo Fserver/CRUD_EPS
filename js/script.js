@@ -1,10 +1,27 @@
-let listaAfiliados = [], selectTipoDocumento, campoNumeroDocumento, campoNombre, selectAfiliacion, campoPassword, ultimoElementoContador, registroEncontrado, usuarioLogueado
+let listaAfiliados = [], listaUsers = [],
+    selectTipoDocumento, campoNumeroDocumento, campoNombre, selectAfiliacion, campoPassword,
+    selectTipoDocumentoAfiliado, campoNumeroDocumentoAfiliado, campoNombreAfiliado, campoFechaAfiliado,
+    ultimoElementoContador, registroEncontrado, 
+    usuarioLogueado = null
 
+// 0
 function leerLocalStorage() {
-    listaAfiliados = []
+    listaUsers = []
 
     JSON.parse(localStorage.getItem(0)) !== null ?
-        listaAfiliados = JSON.parse(localStorage.getItem(0))
+        listaUsers = JSON.parse(localStorage.getItem(0))
+        :
+        console.log("No hay localStorage en el momento");
+
+    return listaUsers
+}
+
+// 1
+function leerLocalStorageAfiliados() {
+    listaAfiliados = []
+
+    JSON.parse(localStorage.getItem(1)) !== null ?
+        listaAfiliados = JSON.parse(localStorage.getItem(1))
         :
         console.log("No hay localStorage en el momento");
 
@@ -33,9 +50,9 @@ function inicioSesion() {
     inicioPassword = document.getElementById('inicioPassword').value
 
     if (inicioUser != "" && inicioPassword != "") {
-        listaAfiliados = leerLocalStorage()
+        listaUsers = leerLocalStorage()
 
-        registroEncontrado = listaAfiliados.find(elemento => elemento.numeroDocumento == inicioUser)
+        registroEncontrado = listaUsers.find(elemento => elemento.numeroDocumento == inicioUser)
 
         if (registroEncontrado) {
             if (registroEncontrado.numeroDocumento == inicioUser && registroEncontrado.password == inicioPassword) {
@@ -50,7 +67,7 @@ function inicioSesion() {
             } else {
                 alert("Datos incorrectos.", "danger")
             }
-        }
+        } else alert("Datos incorrectos.", "danger")
     } else alert("Debe llenar ambos campos para ingresar.", "info")
 }
 
@@ -69,28 +86,60 @@ function limpiarFormulario() {
     } catch (error) { }
 }
 
-function registrarAfiliado() {
+function registrarUsuario() {
     event.preventDefault()
 
     selectTipoDocumento = document.getElementById('selectTipoDocumento').value
     campoNumeroDocumento = document.getElementById('campoNumeroDocumento').value
     campoNombre = document.getElementById('campoNombre').value.toUpperCase()
-    selectAfiliacion = document.getElementById('selectAfiliacion').value
     campoPassword = document.getElementById('campoPassword').value
 
     if (campoNumeroDocumento != "" && campoNombre != "" && campoPassword != "") {
-        listaAfiliados = leerLocalStorage()
+        listaUsers = leerLocalStorage()
 
-        if (listaAfiliados.find(elemento => elemento.numeroDocumento == campoNumeroDocumento) == undefined) {
-            listaAfiliados.push({
+        if (listaUsers.find(elemento => elemento.numeroDocumento == campoNumeroDocumento) == undefined) {
+            listaUsers.push({
                 tipoDocumento: selectTipoDocumento,
                 numeroDocumento: campoNumeroDocumento,
                 nombre: campoNombre,
-                tipoAfiliacion: selectAfiliacion,
                 password: campoPassword
             },)
-            localStorage.clear()
-            localStorage.setItem(0, JSON.stringify(listaAfiliados))
+            localStorage.removeItem(0)
+            localStorage.setItem(0, JSON.stringify(listaUsers))
+
+            alert("Registro realizado con exito.", "success")
+        } else {
+            alert("El usuario ya existe y no puede ser añadido nuevamente", "danger")
+        }
+
+        limpiarFormulario()
+    } else alert('Debes llenar cada uno de los campos', 'warning')
+}
+
+function registrarCitaAfiliado() {
+    event.preventDefault()
+
+    selectTipoDocumentoAfiliado = document.getElementById('selectTipoDocumentoAfiliado').value
+    campoNumeroDocumentoAfiliado = document.getElementById('campoNumeroDocumentoAfiliado').value
+    campoNombreAfiliado = document.getElementById('campoNombreAfiliado').value.toUpperCase()
+    campoFechaAfiliado = document.getElementById('campoFechaAfiliado').value
+    selectEspecialidadAfiliado = document.getElementById('selectEspecialidadAfiliado').value
+
+    console.log(campoFechaAfiliado);
+
+    if (campoNumeroDocumentoAfiliado != "" && campoNombreAfiliado != "" && campoFechaAfiliado != "") {
+        listaAfiliados = leerLocalStorageAfiliados()
+
+        if (listaAfiliados.find(elemento => elemento.numeroDocumento == campoNumeroDocumentoAfiliado) == undefined) {
+            listaAfiliados.push({
+                tipoDocumento: selectTipoDocumentoAfiliado,
+                numeroDocumento: campoNumeroDocumentoAfiliado,
+                nombre: campoNombreAfiliado,
+                fecha: campoFechaAfiliado,
+                especialista: selectEspecialidadAfiliado
+            },)
+            localStorage.removeItem(1)
+            localStorage.setItem(1, JSON.stringify(listaAfiliados))
 
             alert("Registro realizado con exito.", "success")
         } else {
