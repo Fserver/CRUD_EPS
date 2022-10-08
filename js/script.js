@@ -225,7 +225,6 @@ function destruirSesion() {
 
 })()
 
-
 function eliminarAfiliado() {
     event.preventDefault()
 
@@ -264,24 +263,30 @@ function cargarListaAfiliados(id) {
 function actualizarAfiliado() {
     event.preventDefault()
 
-    listaAfiliados = leerLocalStorageAfiliados()
+    campoNumeroDocumentoAfiliado = document.getElementById('campoNumeroDocumentoAfiliadoUpdate').value
+    campoNombreAfiliado = document.getElementById('campoNombreAfiliadoUpdate').value.toUpperCase()
+    campoFechaAfiliado = document.getElementById('campoFechaAfiliadoUpdate').value
 
-    let registroEncontrado = listaAfiliados.find(elemento => elemento.numeroDocumento == registroEditar)
+    if (campoNumeroDocumentoAfiliado != "" && campoNombreAfiliado != "" && campoFechaAfiliado != "") {
+        listaAfiliados = leerLocalStorageAfiliados()
 
-    selectTipoDocumentoAfiliadoUpdate = document.getElementById('selectTipoDocumentoAfiliadoUpdate').options
-    registroEncontrado.tipoDocumento = selectTipoDocumentoAfiliadoUpdate[selectTipoDocumentoAfiliadoUpdate.selectedIndex].text
+        let registroEncontrado = listaAfiliados.find(elemento => elemento.numeroDocumento == registroEditar)
 
-    registroEncontrado.numeroDocumento = document.getElementById('campoNumeroDocumentoAfiliadoUpdate').value
-    registroEncontrado.nombre = document.getElementById('campoNombreAfiliadoUpdate').value
-    registroEncontrado.fecha = document.getElementById('campoFechaAfiliadoUpdate').value
+        selectTipoDocumentoAfiliadoUpdate = document.getElementById('selectTipoDocumentoAfiliadoUpdate').options
+        registroEncontrado.tipoDocumento = selectTipoDocumentoAfiliadoUpdate[selectTipoDocumentoAfiliadoUpdate.selectedIndex].text
 
-    selectEspecialidadAfiliadoUpdate = document.getElementById('selectEspecialidadAfiliadoUpdate').options
-    console.log(selectEspecialidadAfiliadoUpdate[selectEspecialidadAfiliadoUpdate.selectedIndex].text);
-    registroEncontrado.especialista = selectEspecialidadAfiliadoUpdate[selectEspecialidadAfiliadoUpdate.selectedIndex].text
+        registroEncontrado.numeroDocumento = document.getElementById('campoNumeroDocumentoAfiliadoUpdate').value
+        registroEncontrado.nombre = document.getElementById('campoNombreAfiliadoUpdate').value
+        registroEncontrado.fecha = document.getElementById('campoFechaAfiliadoUpdate').value
+
+        selectEspecialidadAfiliadoUpdate = document.getElementById('selectEspecialidadAfiliadoUpdate').options
+        console.log(selectEspecialidadAfiliadoUpdate[selectEspecialidadAfiliadoUpdate.selectedIndex].text);
+        registroEncontrado.especialista = selectEspecialidadAfiliadoUpdate[selectEspecialidadAfiliadoUpdate.selectedIndex].text
 
 
-    localStorage.removeItem('1')
-    localStorage.setItem('1', JSON.stringify(listaAfiliados))
+        localStorage.removeItem('1')
+        localStorage.setItem('1', JSON.stringify(listaAfiliados))
 
-    location.reload()
+        location.reload()
+    } else alert("Se deben llenar todos los campos para hacer una actualización","warning")
 }
