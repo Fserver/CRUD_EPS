@@ -22,19 +22,20 @@ const TIPO_DOCUMENTO = [
     "BOGOTÁ",       //2
     "BUGA",         //3
     "BUENAVENTURA"  //4
-], REGIMEN = [
-    "RESPONSABLE DE IVA",                   //0
-    "PERSONA NATURAL RESPONSABLE DE IVA",   //1
-    "ESPECIAL",                             //2
-    "PERSONA NATURAL NO RESPONSABLE DE IVA" //3
+], SEDE = [
+    "NORTE",    //0
+    "SUR",      //1
+    "ESTE",     //2
+    "OESTE",    //3
+    "CENTRO"    //4
 ]
 
 // 1
 function leerLocalStorageAEmpleador() {
     listaEmpleador = []
 
-    JSON.parse(localStorage.getItem('2')) !== null ?
-        listaEmpleador = JSON.parse(localStorage.getItem('2'))
+    JSON.parse(localStorage.getItem('3')) !== null ?
+        listaEmpleador = JSON.parse(localStorage.getItem('3'))
         :
         console.log("No hay localStorage en el momento");
 
@@ -109,8 +110,8 @@ function registrarCitaEmpleador() {
                 codigoPostal: campoCodigoPostalEmpleador,
                 regimen: textoRegimenEmpleador
             },)
-            localStorage.removeItem('2')
-            localStorage.setItem('2', JSON.stringify(listaEmpleador))
+            localStorage.removeItem('3')
+            localStorage.setItem('3', JSON.stringify(listaEmpleador))
 
             location.reload()
         } else {
@@ -201,8 +202,8 @@ function eliminarAfiliado() {
 
     listaEmpleador = listaEmpleador.filter(registro => registro.numeroDocumento != registroEditar)
 
-    localStorage.removeItem('2')
-    localStorage.setItem('2', JSON.stringify(listaEmpleador))
+    localStorage.removeItem('3')
+    localStorage.setItem('3', JSON.stringify(listaEmpleador))
 
     alert("Registro eliminado.", "danger");
 
@@ -227,7 +228,7 @@ function cargarListaEmpleador(id) {
     document.getElementById('campoEmailEmpleadorUpdate').value = registroEncontrado.email
     document.getElementById('campoCodigoPostalEmpleadorUpdate').value = registroEncontrado.codigoPostal
 
-    document.getElementById('selectRegimenEmpleadorUpdate').value = REGIMEN.indexOf(registroEncontrado.regimen)
+    document.getElementById('selectRegimenEmpleadorUpdate').value = SEDE.indexOf(registroEncontrado.regimen)
 
     registroEditar = id
 }
@@ -273,8 +274,8 @@ function actualizarEmpleador() {
         registroEncontrado.regimen = selectRegimenEmpleadorUpdate[selectRegimenEmpleadorUpdate.selectedIndex].text
 
 
-        localStorage.removeItem('2')
-        localStorage.setItem('2', JSON.stringify(listaEmpleador))
+        localStorage.removeItem('3')
+        localStorage.setItem('3', JSON.stringify(listaEmpleador))
 
         location.reload()
     } else alert("Se deben llenar todos los campos para hacer una actualización", "warning")
