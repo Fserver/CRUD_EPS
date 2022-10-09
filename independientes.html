@@ -7,21 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EPS - Salud Primero</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+
 </head>
 
-<body class="container">
+<body style="width: 100%;" class="px-5 pb-5">
 
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg" style="background-color:
+    #F2F2F2">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#" onclick="destruirSesion()">Salir</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+           
+             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                    
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.html">INICIO</a>
+                        <a class="nav-link active" aria-current="page" href="index.html">INICIO</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="afiliados.html">AFILIADOS</a>
@@ -30,17 +33,17 @@
                         <a class="nav-link" href="empleadores.html">EMPLEADORES</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">INDEPENDIENTES</a>
+                        <a class="nav-link" href="independientes.html">INDEPENDIENTES</a>
                     </li>
                 </ul>
             </div>
 
-            <div class="d-flex align-items-end flex-column ms-auto mt-2">
-                <p id="usuarioActivo"></p>
+            <div class="d-flex  ms-auto mt-3">
+                <h5 id="usuarioActivo"></h5>
+                <p>   <a class="navbar-brand mx-2" href="#"  onclick="destruirSesion()"> <i class="fa-solid fa-power-off"></i></a></p>                
             </div>
         </div>
     </nav>
-
 
 
     <!-- ALERTA -->
@@ -49,14 +52,14 @@
 
     <div class="row mt-4">
         <div class="col-12">
-            <h2 class="display-5">Formulario</h2>
+            <h2 class="display-5">Formulario Independientes</h2>
 
             <form class="row" id="formularioRegistroEmpleador" action="">
 
                 <!-- IZQUIERDO -->
                 <div class="col-md-6">
                     <div class="mb-3 form-group">
-                        <label for="exampleFormControlInput1" class="form-label">Tipo de Documento</label>
+                        <label for="exampleFormControlInput1" class="form-label">Tipo de Documento <i class="fa fa-asterisk small text-primary"></i></label>
                         <select class="form-select" id="selectTipoDocumentoEmpleador"
                             aria-label="Default select example">
                             <option value="0">Cédula de Ciudadanía</option>
@@ -68,17 +71,17 @@
                     </div>
 
                     <div class="mb-3 form-group">
-                        <label for="exampleFormControlInput3" class="form-label">Nombre</label>
+                        <label for="exampleFormControlInput3" class="form-label">Nombre <i class="fa fa-asterisk small text-primary"></i></label>
                         <input type="text" class="form-control" id="campoEmpresaEmpleador" minlength="10" required>
                     </div>
 
                     <div class="mb-3 form-group">
-                        <label for="exampleFormControlInput3" class="form-label">Dirección</label>
+                        <label for="exampleFormControlInput3" class="form-label">Dirección <i class="fa fa-asterisk small text-primary"></i></label>
                         <input type="text" class="form-control" id="campoDireccionEmpleador" minlength="10" required>
                     </div>
 
                     <div class="mb-3 form-group">
-                        <label for="exampleFormControlInput2" class="form-label">Barrio</label>
+                        <label for="exampleFormControlInput2" class="form-label">Barrio <i class="fa fa-asterisk small text-primary"></i></label>
                         <input type="text" class="form-control" id="campoCodigoPostalEmpleador" required>
                     </div>
                 </div>
@@ -86,12 +89,12 @@
                 <!-- DERECHO -->
                 <div class="col-md-6">
                     <div class="mb-3 form-group">
-                        <label for="exampleFormControlInput2" class="form-label"># Documento</label>
+                        <label for="exampleFormControlInput2" class="form-label">No. Documento <i class="fa fa-asterisk small text-primary"></i></label>
                         <input type="number" class="form-control" id="campoNumeroDocumentoEmpleador" required>
                     </div>
 
                     <div class="mb-3 form-group">
-                        <label for="exampleFormControlInput1" class="form-label">Ciudad</label>
+                        <label for="exampleFormControlInput1" class="form-label">Ciudad <i class="fa fa-asterisk small text-primary"></i></label>
                         <select class="form-select" id="selectCiudadEmpleador" aria-label="Default select example">
                             <option value="0">CALI</option>
                             <option value="1">MEDELLÍN</option>
@@ -102,12 +105,12 @@
                     </div>
 
                     <div class="mb-3 form-group">
-                        <label for="exampleFormControlInput3" class="form-label">Correo Electrónico</label>
+                        <label for="exampleFormControlInput3" class="form-label">Correo Electrónico <i class="fa fa-asterisk small text-primary"></i></label>
                         <input type="email" class="form-control" id="campoEmailEmpleador" minlength="10" required>
                     </div>
 
                     <div class="mb-3 form-group">
-                        <label for="exampleFormControlInput1" class="form-label">Sede</label>
+                        <label for="exampleFormControlInput1" class="form-label">Sede <i class="fa fa-asterisk small text-primary"></i></label>
                         <select class="form-select" id="selectRegimenEmpleador" aria-label="Default select example">
                             <option value="0">NORTE</option>
                             <option value="1">SUR</option>
@@ -267,6 +270,10 @@
     <script src="js/jquery.dataTables.min.js"></script>
     <script src="js/dataTables.bootstrap5.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    
+    <script src="js/sweetalert2@11.js"></script>
+    <script src="js/d607a1eba4.js"></script>
+
     <script src="js/scriptIndependientes.js"></script>
 
     <script type="text/javascript" class="init">

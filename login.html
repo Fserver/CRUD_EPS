@@ -7,57 +7,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EPS - Salud Primero</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/d607a1eba4.js"crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+    
 </head>
-
-<body class="container">
-
-    <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">EPS</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                <form class="ms-5 mt-2 d-flex align-items-end">
-                    <input id="inicioUser" class="form-control me-2" type="text" placeholder="Usuario" required>
-                    <input id="inicioPassword" class="form-control me-2" type="password" placeholder="Contraseña"
-                        required>
-                    <button class="btn btn-outline-success" type="submit" onclick="inicioSesion()">Ingresar</button>
-                </form>
-
-                <div class="d-flex align-items-end flex-column ms-auto mt-2">
-                    <a type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalRegistro">
-                        Aún no está registrado ?
-                    </a>
-                </div>
-            </div>
-
+<header class="d-flex py-3 border-bottom"  style="background-color:
+#F2F2F2">
+        <a
+            href="/"
+            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto
+            text-dark text-decoration-none px-5">
+            <span class="fs-5"><i class="fa-solid fa-house-medical"></i> EPS - SALUD PRIMERO</span>
+        </a>
+</header>
+<body>
+<div class="wrapper">
+    <form class="form-signin">
+        <h2 class="form-signin-heading pb-4 text-center">Inicio de
+            Sesion <i class="fa-solid fa-user" style="color:#5F9DF7 ;"></i></h2>
+        <input type="text" class="form-control mb-4"
+         id="inicioUser" placeholder="Usuario" autofocus=""
+            />
+        <input type="password" class="form-control mb-4" id="inicioPassword"
+             placeholder="Contraseña" required/>
+        <div class="buttonLogin">
+            <button class="botonl btn btn-lg btn-block" type="submit"
+            onclick="inicioSesion()">Iniciar Sesion</button>
         </div>
-    </nav>
-
-    <div class="d-grid gap-1 m-5 justify-content-center">
-        <img class="img-fluid" src="fotos/login.png" style="max-height: 30rem;">
-    </div>
-
-
-
+        <p class="text-center pt-4">¿Aun no te encuentras registrado?</p>
+        <div class="buttonR">
+            <button class="botonr btn btn-lg btn-block" type="button"
+            data-bs-toggle="modal" data-bs-target="#modalRegistro">¡Registrate!</button>
+        </div>
+    </form>
 
     <!-- MODAL OCULTO - FORMULARIO REGISTRO -->
     <div class="modal fade" id="modalRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Formulario de Registro</h1>
+                <div class="modal-header" style="background-color: #c4daf0;">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar Usuario <i class="fa-solid fa-user-plus" style="color: #5F9DF7 ;"></i></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
                     <form id="formularioRegistro" action="">
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Tipo de Documento</label>
+                            <label for="exampleFormControlInput1" class="form-label">Tipo de Documento  <i class="fa fa-asterisk small text-primary"></i></label>
                             <select class="form-select" id="selectTipoDocumento" aria-label="Default select example">
                                 <option value="0">Cédula de Ciudadanía</option>
                                 <option value="1">Cédula de Extranjería</option>
@@ -67,17 +63,17 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlInput2" class="form-label"># Documento</label>
+                            <label for="exampleFormControlInput2" class="form-label">No. Documento  <i class="fa fa-asterisk small text-primary"></i></label>
                             <input type="number" class="form-control" id="campoNumeroDocumento"
                                 placeholder="1.111.000.000" required>
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlInput3" class="form-label">Nombre</label>
+                            <label for="exampleFormControlInput3" class="form-label">Nombre  <i class="fa fa-asterisk small text-primary"></i></label>
                             <input type="text" class="form-control" id="campoNombre"
                                 placeholder="Escriba su nombre aquí" minlength="10" required>
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlInput5" class="form-label">Contraseña</label>
+                            <label for="exampleFormControlInput5" class="form-label">Contraseña  <i class="fa fa-asterisk small text-primary"></i></label>
                             <input type="password" class="form-control" id="campoPassword" placeholder="****"
                                 minlength="6" required>
                         </div>
@@ -102,6 +98,7 @@
 
 
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/sweetalert2@11.js"></script>
     <script src="js/script.js"></script>
 
 </body>

@@ -1,0 +1,69 @@
+.nav-link{
+    color: white;
+    
+}
+
+.nav-link:hover{
+    color: white;
+
+    
+}
+
+.main{
+    font-size: 18px;
+}
+
+.main:hover{
+    background-color: #a4b4e3;
+    border-radius: 5px;
+    font-size: 22px;
+}
+
+
+
+body {
+	background: #eee !important;	
+}
+
+.wrapper {	
+	margin-top: 70px;
+  margin-bottom: 50px;
+}
+
+.form-signin {
+  max-width: 500px;
+  padding: 60px 110px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 3px solid rgba(0,0,0,0.1);  
+}
+
+.botonl{
+    background-color: #82b4fe;
+    padding: 7px 30px;
+    
+}
+
+.botonl:hover{
+    background-color: #cff0f4;
+}
+
+.buttonLogin{
+    display: flex;
+    justify-content: center;
+}
+
+.buttonR{
+    display: flex;
+    justify-content: center;
+}
+
+.botonr{
+    background-color: #2192FF;
+    padding: 7px 30px;
+    
+}
+
+.botonr:hover{
+    background-color: #cee5ea;
+}

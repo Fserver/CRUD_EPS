@@ -45,7 +45,17 @@ function leerLocalStorageAfiliados() {
 //ALERTA
 const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 
-const alert = (message, type) => {
+const alert = (message) =>{
+    Swal.fire({
+        icon: 'success',
+        title:`${message}`,
+        showConfirmButton: false,
+        timerProgressBar:true,
+        timer: 1000
+      })
+}
+
+const alertT = (message, type) => {
     const wrapper = document.createElement('div')
     wrapper.innerHTML = [
         `<div class="alert alert-${type} alert-dismissible" role="alert">`,
@@ -56,6 +66,18 @@ const alert = (message, type) => {
 
     alertPlaceholder.append(wrapper)
 }
+
+/* const alert = (message, type) => {
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML = [
+        `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+        `   <div>${message}</div>`,
+        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '</div>'
+    ].join('')
+
+    alertPlaceholder.append(wrapper)
+} */
 
 function inicioSesion() {
     event.preventDefault()
@@ -76,13 +98,32 @@ function inicioSesion() {
                 }
                 sessionStorage.setItem('sesion', JSON.stringify(usuarioLogueado))
 
-                console.log(registroEncontrado.nombre);
-                window.location.href = "index.html"
+                Swal.fire({
+                    icon: 'success',
+                   title:'Bienvenido a nuestra plataforma',
+                   showConfirmButton: false,
+                   timer: 1500
+             }),
+             setTimeout(() => {
+                window.location.href="index.html"
+              }, "1000");
             } else {
-                alert("Datos incorrectos.", "danger")
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Datos incorrectos',
+                  })
             }
-        } else alert("Datos incorrectos.", "danger")
-    } else alert("Debe llenar ambos campos para ingresar.", "info")
+        }else
+         Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Datos incorrectos',
+          })
+    } else  Swal.fire({
+          icon: 'info',
+          title: 'Debes llenar ambos campos para ingresar',
+        })
 }
 
 function limpiarFormulario() {
@@ -121,13 +162,27 @@ function registrarUsuario() {
             localStorage.removeItem('0')
             localStorage.setItem('0', JSON.stringify(listaUsers))
 
-            alert("Registro realizado con exito.", "success")
+            Swal.fire({
+                icon: 'success',
+               title:'Registro realizado con exito',
+               showConfirmButton: false,
+               timer: 1500
+         })
         } else {
-            alert("El usuario ya existe y no puede ser añadido nuevamente", "danger")
+           Swal.fire({
+                icon: 'warning',
+               title:'El usuario ya existe y no puede ser agregado nuevamente',
+               showConfirmButton: false,
+               timer: 1500
+         })
         }
 
         limpiarFormulario()
-    } else alert('Debes llenar cada uno de los campos', 'warning')
+    } else Swal.fire({
+        icon: 'info',
+        title: 'Debes llenar todos los campos para continuar',
+      })
+      limpiarFormulario()
 }
 
 function registrarCitaAfiliado() {
@@ -158,12 +213,23 @@ function registrarCitaAfiliado() {
             localStorage.setItem('1', JSON.stringify(listaAfiliados))
 
             location.reload()
+            
         } else {
-            alert("El afiliado ya existe y no puede ser añadido nuevamente", "danger")
+            Swal.fire({
+                icon: 'warning',
+               title:'El afiliado ya existe y no puede ser agregado nuevamente',
+               showConfirmButton: false,
+               timer: 1500
+         })
         }
 
         limpiarFormulario()
-    } else alert('Debes llenar cada uno de los campos', 'warning')
+    } else Swal.fire({
+        icon: 'warning',
+       title:'Debes llenar cada uno de los campos',
+       showConfirmButton: false,
+       timer: 1500
+ })
 }
 
 //COMPROBADOR DE SESIÓN
@@ -236,7 +302,7 @@ function eliminarAfiliado() {
     localStorage.removeItem('1')
     localStorage.setItem('1', JSON.stringify(listaAfiliados))
 
-    alert("Registro eliminado.", "danger");
+    alertT("Registro eliminado.", "danger");
 
     location.reload()
 }
@@ -276,9 +342,9 @@ function actualizarAfiliado() {
         selectTipoDocumentoAfiliadoUpdate = document.getElementById('selectTipoDocumentoAfiliadoUpdate').options
         registroEncontrado.tipoDocumento = selectTipoDocumentoAfiliadoUpdate[selectTipoDocumentoAfiliadoUpdate.selectedIndex].text
 
-        registroEncontrado.numeroDocumento = document.getElementById('campoNumeroDocumentoAfiliadoUpdate').value
-        registroEncontrado.nombre = document.getElementById('campoNombreAfiliadoUpdate').value
-        registroEncontrado.fecha = document.getElementById('campoFechaAfiliadoUpdate').value
+        registroEncontrado.numeroDocumento = campoNumeroDocumentoAfiliado
+        registroEncontrado.nombre = campoNombreAfiliado
+        registroEncontrado.fecha = campoFechaAfiliado
 
         selectEspecialidadAfiliadoUpdate = document.getElementById('selectEspecialidadAfiliadoUpdate').options
         console.log(selectEspecialidadAfiliadoUpdate[selectEspecialidadAfiliadoUpdate.selectedIndex].text);
